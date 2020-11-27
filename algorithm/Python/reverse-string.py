@@ -1,36 +1,45 @@
-# https://leetcode.com/problems/reverse-string/
-# Write a function that reverses a string. The input string is given as an array of characters char[].
+# https://leetcode.com/problems/valid-palindrome/
+# Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
 #
-# Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
-#
-# You may assume all the characters consist of printable ascii characters.
+# Note: For the purpose of this problem, we define empty string as valid palindrome.
 
 # Example 1:
 #
-# Input: ["h","e","l","l","o"]
-# Output: ["o","l","l","e","h"]
-#
+# Input: "A man, a plan, a canal: Panama"
+# Output: true
 # Example 2:
 #
-# Input: ["H","a","n","n","a","h"]
-# Output: ["h","a","n","n","a","H"]
+# Input: "race a car"
+# Output: false
+
+import re
+
 
 class Solution:
-    def reverseString(self, s: List[str]) -> None:
-        """
-        Do not return anything, modify s in-place instead.
-        """
+    def isPalindrome(self, s: str) -> bool:
 
-        # Option1
+        # Option 1
+        s = s.lower()
+        s = re.sub("[^a-z0-9]", "", s)
+
         start = 0
         end = len(s) - 1
-        for i in range(end):
-            s[end], s[start] = s[start], s[end]
-            start += 1
-            end -= 1
+
+        for i in range(len(s)):
+            # Check Valid Palindrome
+            if s[start] != s[end]:
+                return False
+
             if start > end:
                 break
+            start += 1
+            end -= 1
 
-        # Better Option
-        # s[:] = s[::-1]
+        return True
+
+        # Option 2
+        # s = s.lower()
+        # s = re.sub("[^a-z0-9]", "", s)
+        # return s == s[:: -1]
+
 
