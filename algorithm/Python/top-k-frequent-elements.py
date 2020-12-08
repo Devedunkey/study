@@ -18,6 +18,7 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
 
+        # Option 1
         count = collections.Counter(nums)
         temp = []
         for i in count: heapq.heappush(temp, [count[i], i])
@@ -25,3 +26,6 @@ class Solution:
         result = []
         for i in range(len(temp)): result.append(heapq.heappop(temp)[1])
         return result[::-1][0:k]
+
+        # Option 2
+        # return list(zip(*collections.Counter(nums.most_common(k))))[0]
